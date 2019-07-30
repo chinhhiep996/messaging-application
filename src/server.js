@@ -1,13 +1,15 @@
 import express from 'express';
+import connectDB from './config/connectDB';
+
 const app = express();
 
-const hostname = 'localhost';
-const PORT = 8080;
+// Connect to MongoDB
+connectDB();
 
-app.get('hello', (req, res) => {
+app.get('/hello', (req, res) => {
   res.send("<h1>Hello world !!!</h1>");
 });
 
-app.listen(PORT, hostname, () => {
-  console.log('App running on port http://' + hostname + ':' + PORT);
+app.listen(process.env.APP_PORT, process.env.APP_HOST, () => {
+  console.log('App running on port http://' + process.env.APP_HOST + ':' + process.env.APP_PORT);
 });
