@@ -25,31 +25,20 @@ const UserSchema = new Schema({
     default: 'USER'
   },
   local: {
-    email: {
-      type: String,
-      trim: true
-    },
+    email: { type: String, trim: true },
     password: String,
-    isActive: {
-      type: Boolean,
-      default: false
-    }
+    isActive: { type: Boolean, default: false },
+    verifyToken: String
   },
   facebook: {
     uid: String,
     token: String,
-    email: {
-      type: String,
-      trim: true
-    } 
+    email: { type: String, trim: true }
   },
   google: {
     uid: String,
     token: String,
-    email: {
-      type: String,
-      trim: true
-    } 
+    email: { type: String, trim: true }
   },
   createdAt: {
     type: Number,
@@ -72,6 +61,21 @@ UserSchema.statics = {
 
   findByEmail(email) {
     return this.findOne({"local.email": email}).exec();
+  },
+
+  removeById(id) {
+    return this.findByIdAndRemove(id).exec();
+  },
+
+  findByToken(token) {
+    return this.findOne({"local.verifyToken": token}).exec();
+  },
+
+  verify(token) {
+    return this.findOneAndUpdate(
+        {"local.verifyToken": token},
+        {"local.isActive": true, "local.verifyToken": null}
+    ).exec();
   }
 };
 
