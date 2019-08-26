@@ -1,5 +1,5 @@
 # messaging-application
-awesome chat with nodejs 
+messager with nodejs 
 
 - bootstrap: **^3.3.7**
 - font-awesome **^4.7.0**
