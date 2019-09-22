@@ -4,7 +4,6 @@ import bcrypt from 'bcrypt';
 import UserModel from '../models/user.model';
 import { transErrors, transSuccess, transMail } from './../../lang/vi';
 import sendMail from '../config/mailer';
-import {to} from "../public/bower_components/moment/src/lib/moment/to";
 
 let saltRounds = 7;
 
@@ -58,7 +57,7 @@ const verifyAccount = (token) => {
     await UserModel.verify(token);
     resolve(transSuccess.account_actived);
   });
-}
+};
 
 module.exports = {
   register,
