@@ -3,6 +3,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import connectFlash from 'connect-flash';
+import passport from 'passport';
 
 require('dotenv').config();
 
@@ -28,6 +29,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Enable flash messages
 app.use(connectFlash());
+
+//Config passport is
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Init all routes
 initRoutes(app);
